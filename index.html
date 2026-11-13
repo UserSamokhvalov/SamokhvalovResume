@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Максим Самохвалов — Руководитель проектов в IT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --light:#eef0f3;      /* фон 1-го и 3-го блоков */
+  --dark:#cfd8e3;       /* фон 2-го и 4-го блоков */
+  --ink:#1f2a37;
+  --muted:#5c6773;
+  --accent:#2f5d8a;
+  --card:#ffffff;
+  --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+button{font-family:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:"Open Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--light);line-height:1.6}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+section{padding:72px 0}
+h2{font-size:clamp(26px,4vw,34px);font-weight:800;margin-bottom:32px;letter-spacing:-.01em}
+
+/* меню */
+header.nav{position:sticky;top:0;z-index:10;background:rgba(207,216,227,.96);backdrop-filter:blur(6px)}
+.nav .wrap{display:flex;justify-content:flex-end;align-items:center;height:60px}
+.nav b{color:var(--ink);font-weight:800}
+.nav ul{display:flex;gap:28px;list-style:none}
+.nav a{color:#3a4a5c;text-decoration:none;font-weight:500;font-size:15px}
+.nav a:hover,.nav a:focus-visible{color:var(--accent);outline:none;text-decoration:underline;text-underline-offset:6px}
+
+/* 1. шапка */
+.hero{display:flex;align-items:center;justify-content:space-between;gap:40px;padding-top:56px}
+.hero .text{max-width:560px}
+.hero h1{font-size:clamp(34px,6vw,56px);line-height:1.1;font-weight:800;letter-spacing:-.02em}
+.hero p{margin-top:14px;font-size:clamp(18px,2.4vw,22px);color:var(--accent);font-weight:700}
+.photo{flex:0 0 auto;width:clamp(180px,28vw,300px);aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--dark);
+  display:grid;place-items:center;color:var(--ink);font-size:64px;font-weight:800;box-shadow:0 0 0 8px #fff,0 18px 40px rgba(15,42,61,.18)}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+
+.about{background:var(--card);border-radius:var(--radius);padding:32px 36px;margin-top:48px;box-shadow:0 10px 30px rgba(15,42,61,.07)}
+.about h2{font-size:24px;margin-bottom:16px}
+.about ul{list-style:none;display:grid;gap:12px}
+.about li{position:relative;padding-left:26px}
+.about li::before{content:"";position:absolute;left:0;top:.65em;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+
+.exp-block{padding-top:0}
+.about.exp{margin-top:0}
+.about.exp ul{display:block;columns:2;column-gap:44px}
+.about.exp li{break-inside:avoid;margin-bottom:14px}
+/* 2. цифры */
+.dark{background:var(--dark);color:var(--ink)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.stat{border:1px solid rgba(15,42,61,.22);border-radius:var(--radius);padding:40px 32px;background:rgba(255,255,255,.4)}
+.stat .num{font-size:clamp(48px,9vw,84px);font-weight:800;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.stat .label{margin-top:12px;font-size:18px;color:var(--ink)}
+
+/* 3. навыки */
+.skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(440px,100%),1fr));gap:20px}
+.skill-group:last-child:nth-child(odd){grid-column:1/-1}
+.skill-group{background:var(--card);border-radius:var(--radius);padding:22px 26px;box-shadow:0 10px 30px rgba(15,42,61,.07)}
+.skill-group h3{font-size:17px;margin-bottom:12px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{background:var(--light);border-radius:999px;padding:5px 12px;font-size:14px}
+
+/* 4. портфолио */
+.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.project{background:var(--card);color:var(--ink);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.project .logo{height:72px;border-radius:8px;display:grid;place-items:center;padding:8px}
+.project .logo.dk{background:#3d4a5c}
+.project .logo img{width:100%;height:56px;object-fit:contain;display:block}
+.project .logo .ph{width:44px;height:44px;border-radius:10px;background:var(--light);display:grid;place-items:center;font-weight:800;color:var(--ink);font-size:18px}
+.project h3{font-size:14px;line-height:1.3}
+.project .link{margin-top:auto;font-size:12px;color:var(--accent);font-weight:600;text-decoration:none;overflow-wrap:anywhere;border-bottom:1px solid transparent;align-self:flex-start}
+.project .link:hover,.project .link:focus-visible{border-bottom-color:var(--accent);outline:none}
+
+/* 5. образование */
+.edu{background:var(--card);border-radius:var(--radius);padding:28px 32px;box-shadow:0 10px 30px rgba(15,42,61,.07);display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.edu h3{font-size:20px}
+.edu p{color:var(--muted)}
+.edu .years{font-weight:700;color:var(--accent)}
+h3.sub{margin:48px 0 20px;font-size:24px;font-weight:800}
+.certs{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.cert.is-hidden{display:none}
+.more{display:flex;justify-content:center;margin-top:24px}
+.more[hidden]{display:none}
+.more button{width:52px;height:52px;border-radius:50%;border:2px solid var(--accent);background:var(--card);color:var(--accent);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
+.more button:hover,.more button:focus-visible{background:var(--accent);color:#fff;outline:none}
+.more svg{width:24px;height:24px;transition:transform .25s}
+.more button[aria-expanded="true"] svg{transform:rotate(180deg)}
+.cert{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(15,42,61,.07);text-decoration:none;display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s;color:inherit}
+.cert:hover,.cert:focus-visible{box-shadow:0 14px 36px rgba(15,42,61,.18);transform:translateY(-3px);outline:none}
+.cert .img{position:relative;height:127px;background:#dfe6ee;display:grid;place-items:center}
+.cert .ico{width:56px;height:71px;background:var(--accent);-webkit-mask:url(data:image/png;base64,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) center/contain no-repeat;mask:url(data:image/png;base64,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) center/contain no-repeat}
+.cert .img::after{content:"Открыть";position:absolute;right:8px;bottom:8px;background:rgba(15,42,61,.88);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;opacity:0;transition:opacity .2s}
+.cert:hover .img::after,.cert:focus-visible .img::after{opacity:1}
+.cert .cap{padding:10px 12px}
+.cert .cap b{display:block;font-size:13px;line-height:1.35}
+.cert .cap small{color:var(--muted);font-size:12px;line-height:1.3;display:block;margin-top:2px}
+
+/* 6. контакты */
+.contacts{display:flex;flex-wrap:wrap;gap:16px}
+.contacts a{border:1px solid rgba(15,42,61,.4);border-radius:999px;padding:12px 24px;text-decoration:none;font-weight:700}
+.contacts a:hover,.contacts a:focus-visible{background:var(--ink);color:#fff;outline:none}
+footer{background:#b8c4d2;color:#1f2a37;text-align:center;padding:22px;font-size:14px}
+
+/* лайтбокс для дипломов */
+.lb{position:fixed;inset:0;background:rgba(5,15,22,.9);display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:20;padding:24px 64px}
+.lb.open{display:flex}
+.lb img{max-width:100%;max-height:calc(100% - 70px);min-height:0;border-radius:6px;background:#fff}
+.lb .cap{color:#e6eef4;text-align:center;font-size:15px}
+.lb .cap small{display:block;color:#9fb4c4}
+.lb button{position:absolute;background:rgba(255,255,255,.12);border:0;color:#fff;font-size:28px;width:48px;height:48px;border-radius:50%;cursor:pointer}
+.lb button:hover,.lb button:focus-visible{background:rgba(255,255,255,.28);outline:none}
+.lb .prev{left:8px;top:50%;transform:translateY(-50%)}
+.lb .next{right:8px;top:50%;transform:translateY(-50%)}
+.lb .close{right:12px;top:12px;font-size:24px}
+
+@media (max-width:720px){
+  .about.exp ul{columns:1}
+  .hero{flex-direction:column-reverse;text-align:center;padding-top:36px}
+  .stats{grid-template-columns:1fr}
+  .nav ul{gap:16px}
+  .about{padding:24px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <nav><ul>
+      <li><a href="#about">Обо мне</a></li>
+      <li><a href="#portfolio">Портфолио</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<!-- 1. Шапка + О себе -->
+<section id="about" style="padding-top:0">
+  <div class="wrap">
+    <div class="hero">
+      <div class="text">
+        <h1>Самохвалов Максим</h1>
+        <p>Руководитель проектов в IT (IT Project Manager)</p>
+      </div>
+      <!-- Положите фото рядом с index.html под именем photo.jpg -->
+      <div class="photo"><img src="photo.jpg" alt="Максим Самохвалов" onerror="this.replaceWith(document.createTextNode('МС'))"></div>
+    </div>
+
+    <div class="about">
+      <h2>О себе</h2>
+      <ul>
+        <li>6 лет опыта управления проектами в сфере информационных технологий, включая планирование, выполнение и контроль. Успешный опыт управления проектными командами.</li>
+        <li>Опыт управления сложными и комплексными проектами, включая их успешную реализацию и достижение поставленных целей.</li>
+        <li>Знание методологий управления IT-сервисами и умение успешно применять их на практике.</li>
+        <li>Высокая степень организованности, опыт параллельного ведения нескольких проектов.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Цифры -->
+<section class="dark">
+  <div class="wrap stats">
+    <div class="stat"><div class="num"><span class="count" data-to="6">0</span>+</div><div class="label">лет опыта</div></div>
+    <div class="stat"><div class="num"><span class="count" data-to="50">0</span>+</div><div class="label">реализованных проектов</div></div>
+  </div>
+</section>
+
+<!-- Опыт: Менеджер проектов -->
+<section class="dark exp-block">
+  <div class="wrap">
+    <h2>Менеджер проектов</h2>
+    <div class="about exp">
+      <ul>
+        <li>Реализация веб-проектов в digital-студии (интернет-магазины, корпоративные сайты и лендинги), разработка мобильных приложений под iOS/Android и личных кабинетов различных типов (50+ проектов в портфолио)</li>
+        <li>Руководство рабочими группами разработчиков (4–5 человек), дизайнеров, проектировщиков, SEO и PPC специалистов. Параллельное ведение более 10 проектов</li>
+        <li>Понимание сути основных методологий разработки (Scrum, Waterfall) и жизненного цикла проекта (SDLC)</li>
+        <li>Опыт ведения проектов по разным моделям, в том числе гибридным (fix price/T&amp;M)</li>
+        <li>Коммуникация с заказчиком, консультирование, ведение деловой переписки, организация встреч и подготовка протоколов</li>
+        <li>Взаимодействие с внешними подрядчиками</li>
+        <li>Подготовка ТЗ, постановка, декомпозиция и актуализация бэклога задач проекта</li>
+        <li>Распределение задач в команде проекта</li>
+        <li>Планирование, контроль сроков выполнения и качества реализации работ по проекту</li>
+        <li>Управление рисками проекта</li>
+        <li>Ведение проектной документации</li>
+        <li>Ведение отчетов по проектам, управление дебиторской задолженностью</li>
+        <li>Опыт работы с AI-инструментами: Claude для создания различных веб-сервисов и перевода макетов в код; Qwen для саммаризации; Kandinsky и Алиса AI для создания контента, ChatGPT и Deepseek для анализа и прототипизации</li>
+        <li>Понимание SEO и основ контекстной рекламы</li>
+        <li>Базовое владение Figma и понимание принципов UX/UI</li>
+        <li>Базовые знания HTML и CSS</li>
+        <li>Взаимодействие с отделом маркетинга для подготовки кейсов для размещения в портфолио и социальных сетях</li>
+        <li>Подготовка КП по сопутствующим услугам (продвижение, услуги по информационной безопасности, администрированию) для текущих проектов с целью расширения сотрудничества</li>
+        <li>Базовые знания Git, CI/CD</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Навыки -->
+<section>
+  <div class="wrap">
+    <h2>Навыки</h2>
+    <div class="skills" id="skills"></div>
+  </div>
+</section>
+
+<!-- 4. Портфолио -->
+<section class="dark" id="portfolio">
+  <div class="wrap">
+    <h2>Портфолио</h2>
+    <div class="projects" id="projects"></div>
+  </div>
+</section>
+
+<!-- 5. Образование -->
+<section>
+  <div class="wrap">
+    <h2>Образование</h2>
+    <div class="edu">
+      <div>
+        <h3>Ярославский государственный технический университет</h3>
+        <p>Специальность: инженер</p>
+      </div>
+      <div><p class="years">2003 – 2008 гг.</p><p>Высшее</p></div>
+    </div>
+
+    <h3 class="sub">Курсы и повышение квалификации</h3>
+    <div class="certs" id="certs"></div>
+    <div class="more" id="certsMore" hidden><button type="button" aria-expanded="false" aria-controls="certs" title="Показать все"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg></button></div>
+  </div>
+</section>
+
+<!-- 6. Контакты -->
+<section class="dark" id="contacts">
+  <div class="wrap">
+    <h2>Контакты</h2>
+    <div class="contacts" id="contactList"></div>
+  </div>
+</section>
+
+<footer>© <span id="year"></span> Максим Самохвалов</footer>
+<div class="lb" id="lb" role="dialog" aria-modal="true"><button class="close" aria-label="Закрыть">✕</button><button class="prev" aria-label="Назад">‹</button><img alt=""><div class="cap"></div><button class="next" aria-label="Вперёд">›</button></div>
+
+<script>
+/* ===== ДАННЫЕ: редактируйте здесь ===== */
+const skills = [
+  {title:"Управление проектами", items:["Project management","Проектный менеджмент","Управление бэклогом","Планирование и контроль сроков","Управление рисками","Делегирование","Отчётность и аналитика","Подготовка ТЗ"]},
+  {title:"Методологии и модели", items:["Scrum","Waterfall","SDLC","Fix price / T&M","Гибридные модели"]},
+  {title:"Инструменты", items:["Atlassian Jira","Google Workspace","Figma","Adobe Photoshop","Git, CI/CD","HTML и CSS"]},
+  {title:"Коммуникации", items:["Ведение переговоров","Деловая коммуникация","Клиенториентированность","Установка клиентских отношений","Работа с подрядчиками"]},
+  {title:"Digital и маркетинг", items:["SEO","Контекстная реклама","Веб-аналитика","UX/UI","Битрикс24, 1С-Битрикс"]},
+  {title:"AI-инструменты", items:["Claude","ChatGPT","Deepseek","Qwen","Kandinsky","Алиса AI"]},
+  {title:"Языки", items:["Русский — родной","Английский — B1"]}
+];
+
+const projects = [
+  {company:"Электроцентр", url:"https://stv39.ru/", logo:"logos/electrocentr.svg", dark:false},
+  {company:"Либхов", url:"https://libhof.store/", logo:"logos/libhof.svg", dark:true},
+  {company:"Максавит", url:"https://maksavit.ru/", logo:"logos/maksavit.svg", dark:false},
+  {company:"Петровакс", url:"https://petrovax.ru/", logo:"logos/petrovax.svg", dark:false},
+  {company:"Вау", url:"https://wau.ru/", logo:"logos/wau.svg", dark:false},
+  {company:"Shopofmoney", url:"https://shopofmoney.com/", logo:"logos/shopofmoney.png", dark:false},
+  {company:"Агротема", url:"https://www.agrotema.ru/", logo:"logos/agrotema.svg", dark:false},
+  {company:"Айтеко", url:"https://iteco.cloud/", logo:"logos/iteco.webp", dark:true},
+  {company:"Мейлилог", url:"https://mailylog.ru/", logo:"logos/mailylog.png", dark:false},
+  {company:"Комфортзон", url:"https://comfortzoneskin.ru/", logo:null, dark:false},
+  {company:"Геопластборд", url:"https://www.geoplastbord.ru/", logo:"logos/geoplastbord.svg", dark:false},
+  {company:"Пожарная автоматика", url:"https://pozhavt.ru/", logo:"logos/pozhavt.svg", dark:false},
+  {company:"Искусство бокса", url:"https://artboxing.ru/", logo:"logos/artboxing.webp", dark:true},
+  {company:"1С Премиум", url:"https://1c-prem.ru/", logo:"logos/1c-premium.svg", dark:false},
+  {company:"Мебель Сити", url:"https://mebelct.ru/", logo:"logos/mebel-city.svg", dark:true},
+  {company:"Садовые механизмы", url:"https://gardengear.ru/", logo:"logos/gardengear.png", dark:false},
+  {company:"Архикредо", url:"https://www.archicredo.com/", logo:null, dark:false},
+  {company:"Немецкая семейная клиника", url:"https://german.clinic/", logo:"logos/german-clinic.svg", dark:false},
+  {company:"Академи Рус", url:"https://academie-official.ru/", logo:"logos/academie.svg", dark:false},
+  {company:"ОС-электро", url:"https://os-electro.ru/", logo:"logos/os-electro.svg", dark:false}
+]; // logo: путь к файлу (null — буква-заглушка); dark: true — тёмная подложка для светлых логотипов
+
+const certs = [
+  {title:"Интенсив Project Manager", sub:"GeekBrains × Mail.ru Group, 2021", img:"certs/geekbrains-project-manager.jpg"},
+  {title:"Онлайн-интенсив для Product Manager", sub:"GeekBrains × Mail.ru Group, 2020", img:"certs/geekbrains-product-manager.jpg"},
+  {title:"Основы менеджмента", sub:"ИТМО, Открытое образование, 2023", img:"certs/itmo-management.jpg"},
+  {title:"Администратор. Бизнес (1С-Битрикс: Управление сайтом)", sub:"1С-Битрикс, 2021", img:"certs/bitrix-admin-business.jpg"},
+  {title:"Администратор сервиса Битрикс24 (коробочная версия)", sub:"1С-Битрикс, 2021", img:"certs/bitrix24-admin-box.jpg"},
+  {title:"Пользователь сервиса Битрикс24", sub:"1С-Битрикс, 2021", img:"certs/bitrix24.jpg"},
+  {title:"Администратор. Базовый (1С-Битрикс: Управление сайтом)", sub:"1С-Битрикс, 2021", img:"certs/bitrix-admin-basic.jpg"},
+  {title:"Продвижение сайта и Маркетинг (1С-Битрикс)", sub:"1С-Битрикс, 2021", img:"certs/bitrix-seo-marketing.jpg"},
+  {title:"Контент-менеджер (1С-Битрикс: Управление сайтом)", sub:"1С-Битрикс, 2020", img:"certs/bitrix-content-manager.jpg"},
+  {title:"Тестировщик: быстрый старт в IT", sub:"Нетология, 2026", img:"certs/netology.jpg"},
+  {title:"Тестирование на практике: мобильное тестирование", sub:"Stepik, 2026", img:"certs/stepik-mobile-testing.jpg"},
+  {title:"Основы HTML&CSS", sub:"Result University", img:"certs/result-html-css.jpg"},
+  {title:"Сертификат специалиста по Яндекс.Директу, базовый уровень", sub:"Яндекс", img:"certs/yandex-direct.jpg"},
+  {title:"Специалист по Яндекс.Метрике", sub:"Яндекс", img:"certs/yandex-metrika.jpg"},
+  {title:"Курс по Google Аналитике для начинающих", sub:"Google Analytics Academy", img:"certs/google-analytics.jpg"},
+  {title:"Поисковое продвижение", sub:"Обучающий центр Cybermarketing", img:"certs/cybermarketing.jpg"},
+  {title:"Слепой десятипальцевый набор: курс «СОЛО на клавиатуре»", sub:"ЭргоСоло, 2023", img:"certs/ergosolo.jpg"},
+  {title:"Маркетинг", sub:"НИУ ВШЭ, Открытое образование, 2016", img:"certs/hse-marketing.jpg"},
+  {title:"История дизайна", sub:"НИУ ВШЭ, Открытое образование, 2018", img:"certs/hse-design.jpg"},
+  {title:"Диплом: Академия фотожурналистики и документальной фотографии", sub:"Фотографика, 2017 · 213 ак. ч.", img:"certs/fotografika.jpg"}
+];
+
+const contacts = [
+  {label:"+7 (980) 661-63-53", href:"tel:+79806616353"},
+  {label:"Telegram @Samokhvalof", href:"https://t.me/Samokhvalof"},
+  {label:"samokhvalov85@mail.ru", href:"mailto:samokhvalov85@mail.ru"}
+];
+/* ===================================== */
+
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+$("skills").innerHTML = skills.map(g =>
+  `<div class="skill-group"><h3>${esc(g.title)}</h3><div class="tags">${g.items.map(i=>`<span>${esc(i)}</span>`).join("")}</div></div>`).join("");
+
+$("projects").innerHTML = projects.map(p => {
+  const host = p.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  const logo = p.logo
+    ? `<img src="${esc(p.logo)}" alt="${esc(p.company)}" onerror="this.outerHTML='<div class=ph>${esc(p.company[0] || "?")}</div>'">`
+    : `<div class="ph">${esc(p.company[0] || "?")}</div>`;
+  return `<article class="project">
+     <div class="logo${p.dark ? " dk" : ""}">${logo}</div>
+     <h3>${esc(p.company)}</h3>
+     <a class="link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${esc(host)}</a>
+   </article>`;
+}).join("");
+
+$("certs").innerHTML = certs.map((c, i) =>
+  `<a class="cert" href="${esc(c.img)}" data-i="${i}">
+     <div class="img"><span class="ico" role="img" aria-label="Сертификат"></span></div>
+     <div class="cap"><b>${esc(c.title)}</b><small>${esc(c.sub)}</small></div>
+   </a>`).join("");
+
+/* показываем первые два ряда сертификатов, остальные — под стрелкой */
+const certGrid = $("certs"), moreWrap = $("certsMore"), moreBtn = moreWrap.querySelector("button");
+let certsOpen = false;
+function layoutCerts(){
+  const cols = getComputedStyle(certGrid).gridTemplateColumns.split(" ").length;
+  const limit = cols * 2, items = [...certGrid.children];
+  items.forEach((el, i) => el.classList.toggle("is-hidden", !certsOpen && i >= limit));
+  moreWrap.hidden = items.length <= limit;
+}
+moreBtn.addEventListener("click", () => {
+  certsOpen = !certsOpen;
+  moreBtn.setAttribute("aria-expanded", certsOpen);
+  moreBtn.title = certsOpen ? "Свернуть" : "Показать все";
+  layoutCerts();
+});
+addEventListener("resize", layoutCerts);
+layoutCerts();
+
+$("contactList").innerHTML = contacts.map(c => `<a href="${esc(c.href)}" target="_blank" rel="noopener">${esc(c.label)}</a>`).join("");
+$("year").textContent = new Date().getFullYear();
+
+/* лайтбокс с листанием */
+const lb = $("lb"), lbImg = lb.querySelector("img"), lbCap = lb.querySelector(".cap");
+let cur = 0;
+function show(i){
+  cur = (i + certs.length) % certs.length;
+  lbImg.src = certs[cur].img;
+  lbImg.alt = certs[cur].title;
+  lbCap.innerHTML = `${esc(certs[cur].title)}<small>${esc(certs[cur].sub)} · ${cur + 1} из ${certs.length}</small>`;
+  lb.classList.add("open");
+}
+const closeLb = () => lb.classList.remove("open");
+document.addEventListener("click", e => {
+  const a = e.target.closest(".cert");
+  if (a){ e.preventDefault(); show(+a.dataset.i); return; }
+  if (!lb.classList.contains("open")) return;
+  if (e.target.closest(".prev")) show(cur - 1);
+  else if (e.target.closest(".next")) show(cur + 1);
+  else if (e.target !== lbImg) closeLb();
+});
+document.addEventListener("keydown", e => {
+  if (!lb.classList.contains("open")) return;
+  if (e.key === "Escape") closeLb();
+  if (e.key === "ArrowLeft") show(cur - 1);
+  if (e.key === "ArrowRight") show(cur + 1);
+});
+
+/* анимация счётчиков при прокрутке */
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function run(el){
+  const to = +el.dataset.to;
+  if (reduce){ el.textContent = to; return; }
+  const dur = 1600, t0 = performance.now();
+  (function tick(t){
+    const k = Math.min((t - t0) / dur, 1), eased = 1 - Math.pow(1 - k, 3);
+    el.textContent = Math.round(to * eased);
+    if (k < 1) requestAnimationFrame(tick);
+  })(t0);
+}
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting){ run(e.target); io.unobserve(e.target); }
+}), {threshold:.6});
+document.querySelectorAll(".count").forEach(el => io.observe(el));
+</script>
+</body>
+</html>
