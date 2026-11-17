@@ -86,7 +86,7 @@ header.nav{position:sticky;top:0;z-index:10;background:rgba(207,216,227,.96);bac
 .edu .years{font-weight:700;color:var(--accent)}
 h3.sub{margin:48px 0 20px;font-size:24px;font-weight:800}
 .certs{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
-.cert.is-hidden{display:none}
+.cert.is-hidden,.project.is-hidden{display:none}
 .more{display:flex;justify-content:center;margin-top:24px}
 .more[hidden]{display:none}
 .more button{width:52px;height:52px;border-radius:50%;border:2px solid var(--accent);background:var(--card);color:var(--accent);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
@@ -218,6 +218,7 @@ footer{background:#b8c4d2;color:#1f2a37;text-align:center;padding:22px;font-size
   <div class="wrap">
     <h2>Портфолио</h2>
     <div class="projects" id="projects"></div>
+    <div class="more" id="projectsMore" hidden><button type="button" aria-expanded="false" aria-controls="projects" title="Показать все"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg></button></div>
   </div>
 </section>
 
@@ -343,23 +344,27 @@ $("certs").innerHTML = certs.map((c, i) =>
      <div class="cap"><b>${esc(c.title)}</b><small>${esc(c.sub)}</small></div>
    </a>`).join("");
 
-/* показываем первые два ряда сертификатов, остальные — под стрелкой */
-const certGrid = $("certs"), moreWrap = $("certsMore"), moreBtn = moreWrap.querySelector("button");
-let certsOpen = false;
-function layoutCerts(){
-  const cols = getComputedStyle(certGrid).gridTemplateColumns.split(" ").length;
-  const limit = cols * 2, items = [...certGrid.children];
-  items.forEach((el, i) => el.classList.toggle("is-hidden", !certsOpen && i >= limit));
-  moreWrap.hidden = items.length <= limit;
+/* сворачивание сетки: показываем первые N рядов, остальные — под стрелкой */
+function collapsible(gridId, wrapId, rows){
+  const grid = $(gridId), wrap = $(wrapId), btn = wrap.querySelector("button");
+  let open = false;
+  function layout(){
+    const cols = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+    const limit = cols * rows, items = [...grid.children];
+    items.forEach((el, i) => el.classList.toggle("is-hidden", !open && i >= limit));
+    wrap.hidden = items.length <= limit;
+  }
+  btn.addEventListener("click", () => {
+    open = !open;
+    btn.setAttribute("aria-expanded", open);
+    btn.title = open ? "Свернуть" : "Показать все";
+    layout();
+  });
+  addEventListener("resize", layout);
+  layout();
 }
-moreBtn.addEventListener("click", () => {
-  certsOpen = !certsOpen;
-  moreBtn.setAttribute("aria-expanded", certsOpen);
-  moreBtn.title = certsOpen ? "Свернуть" : "Показать все";
-  layoutCerts();
-});
-addEventListener("resize", layoutCerts);
-layoutCerts();
+collapsible("certs", "certsMore", 2);      // курсы: 2 ряда
+collapsible("projects", "projectsMore", 3); // портфолио: 3 ряда
 
 $("contactList").innerHTML = contacts.map(c => `<a href="${esc(c.href)}" target="_blank" rel="noopener">${esc(c.label)}</a>`).join("");
 $("year").textContent = new Date().getFullYear();
